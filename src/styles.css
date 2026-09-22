@@ -1,0 +1,210 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin-400-800.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/sora-latin-400-700.woff2") format("woff2");
+}
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Sufi Traders design system.
+ * Palette: deep navy, forest green, golden yellow, warm white, charcoal ink.
+ * All colors are oklch tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Brand tokens */
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-soft: var(--navy-soft);
+  --color-forest: var(--forest);
+  --color-gold: var(--gold);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-soft: var(--on-dark-soft);
+  --color-hairline: var(--hairline);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --navy: oklch(0.318 0.093 259.5);
+  --navy-deep: oklch(0.24 0.075 259.5);
+  --navy-soft: oklch(0.45 0.085 259.5);
+  --forest: oklch(0.499 0.106 156.5);
+  --gold: oklch(0.795 0.135 82.5);
+  --sand: oklch(0.978 0.003 247.9);
+  --ink: oklch(0.235 0.011 258);
+  --ink-soft: oklch(0.505 0.014 258);
+  --on-dark: oklch(0.985 0.002 247.9);
+  --on-dark-soft: oklch(0.83 0.012 250);
+  --hairline: oklch(0.895 0.007 250);
+
+  --background: var(--sand);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--navy);
+  --primary-foreground: var(--on-dark);
+  --secondary: oklch(0.955 0.005 250);
+  --secondary-foreground: var(--navy);
+  --muted: oklch(0.955 0.005 250);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--gold);
+  --accent-foreground: var(--navy-deep);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--navy-soft);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--navy-deep);
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--navy-soft);
+}
+
+@utility rule-gold {
+  &::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+}
+
+@utility glass-nav {
+  background: color-mix(in oklab, var(--sand) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+}
+
+@utility glass-nav-dark {
+  background: color-mix(in oklab, var(--navy-deep) 42%, transparent);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid color-mix(in oklab, var(--on-dark) 12%, transparent);
+}
+
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@utility shadow-lift {
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--navy-deep) 6%, transparent),
+    0 24px 60px -32px color-mix(in oklab, var(--navy-deep) 34%, transparent);
+}
+
+@utility grain-navy {
+  background-color: var(--navy-deep);
+  background-image: radial-gradient(
+    circle at 20% 10%,
+    color-mix(in oklab, var(--navy-soft) 55%, transparent),
+    transparent 55%
+  );
+}
